@@ -1,5 +1,5 @@
 #!/bin/bash
-SERVICE_NAME="TEMPLATE-PLEASE-CHANGE"
+SERVICE_NAME="nextcloud"
 SERVICE_VERSION="v0.1"
 
 set -e
@@ -21,23 +21,21 @@ set +o allexport
 
 # COMMANDS
 
-# This is an example command that prints a message from the first argument
-# commands+=([example]="<msg>:Example command that prints <msg>")
-# cmd_example() {
-#   echo "Example: $1"
-# }
+commands+=([remove-skeleton]=":remove nextcloud skeleton files for new users")
+cmd_remove-skeleton() {
+  sudo rm -r $SERVICE_DIR/volumes/data/core/skeleton/* &>/dev/null || true
+  echo "Removed nextcloud skeleton files for new users"
+}
+
+commands+=([occ]="<command>:run occ command")
+cmd_occ() {
+  # check if nextcloud is running
+  docker compose ps nextcloud &>/dev/null || { echo "Nextcloud is not running"; return 1; }
+
+  docker compose exec -u www-data nextcloud ./occ $@
+}
 
 # ATTACHMENTS
-
-# Setup function that is called before the docker up command
-# att_setup() {
-#   echo "Setting up..."
-# }
-
-# Configure function that is called before the docker up, start and restart commands
-# att_configure() {
-#   echo "Configuring..."
-# }
 
 # MAIN
 main "$@"

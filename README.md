@@ -1,6 +1,6 @@
-# service.template
+# service.nextcloud
 
-service for TEMPLATE
+service for nextcloud
 
 [Documentation of service core](https://github.com/Vereine-Vereint/service.core)
 
