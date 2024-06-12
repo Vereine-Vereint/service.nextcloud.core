@@ -1,6 +1,6 @@
 #!/bin/bash
 SERVICE_NAME="nextcloud"
-SERVICE_VERSION="v0.1"
+SERVICE_VERSION="v1.0"
 
 set -e
 
@@ -10,8 +10,6 @@ cd $SERVICE_DIR
 
 # CORE
 source ./core/core.sh
-# BORG
-source ./borg/borg.sh
 
 
 # VARIABLES
